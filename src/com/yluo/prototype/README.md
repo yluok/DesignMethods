@@ -1,0 +1,19 @@
+一、目录说明
+1、simple为简单原型
+2、deepclone为深克隆原型方式
+3、business为实际业务中利用原型方式
+二、目录business业务说明
+A、类说明
+ Account为账户类、Record为记录类，RecordShow为记录展示类（即返回前端的类）,Demo业务模拟测试  
+B、业务需求：
+ 1、从数据库中查询某个用户的投资记录列表，返回的结果信息包括除了我们Record表中的所有字段外，还需要要
+    包括Record中inAccountId/outAccountId对应的Account类中账户的name
+C、业务现状：
+     1、从数据库中查出来的投资记录列表中，单个记录只有账户id，没有账户名，展示时需要展示出账户名
+     2、只能通过请求一次完成
+D、关键点思路分析：
+  1、我们创建一个新类RecordShow继承自Record类，然后追加2个属性inAccountName/outAccountName，分别是流入账户名和流出用户名
+  2、遍历我们的投资记录列表，将我们的Record中的所有属性拷贝至我们的新类RecordShow中，RecordShow中提供一个clone方法，来实现该克隆操作。
+  3、遍历判断账户id与新类账户inAccountId/outAccountId的对应关系，完成新类账户名inAccountName/outAccountName的赋值，
+    最后返回我们的新类RecordShow列表即可
+    
